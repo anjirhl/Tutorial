@@ -1,4 +1,6 @@
-http://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-celebrity-prime-uber-heights-kondapur-hyderabad-1185-sq-ft-spid-M24509241
-http://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-trishala-luxor-apartments-kondapur-hyderabad-1040-sq-ft-r5-spid-N9599875
-http://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-balaji-residency-kondapur-hyderabad-1140-sq-ft-spid-D26304561
-http://www.99acres.com/2-bhk-bedroom-apartment-flat-for-sale-in-matrix-marigold-kondapur-hyderabad-1120-sq-ft-r2-spid-V23016813
+
+SplunkAuditor
+
+| rest /servicesNS/-/-/search/jobs | eval diskUsageMB=diskUsage/1024/1024 | rename eai:acl.owner as user,eai:acl.app AS app_name |search user!="splunk-system-user" |eval search=if((isnull(label) OR label=""),sid,label)| stats sum(diskUsageMB) as totalDiskUsage by user app_name search |sort - totalDiskUsage
+
+index=audit source=audittrail info=completed search_id= user= NOT (user="splunk-system-user" OR user="n/a" OR search_id=rt OR savedsearch_name="") |rex field=_raw "^.__{1}(?P.*)__" |stats count AS No_Runs,avg(total_run_time) AS avg_run_time by savedsearch_name splunk_server user app_name|eval avg_run_time=round(avg_run_time/60,2)|sort - No_Runs avg_run_time
