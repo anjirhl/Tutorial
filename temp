@@ -8,3 +8,9 @@ index=_audit source=audittrail info=completed search_id= user= NOT (user="splunk
 # Reload the indexer 
 
 /opt/splunk/bin/splunk reload index
+
+Issues:
+
+http://docs.splunk.com/Documentation/Splunk/6.2.5/Indexer/Enableclustersindetail#Configure_the_secret_key
+http://docs.splunk.com/Documentation/Splunk/6.0/Indexer/Bucketreplicationissues
+CMStreamingErrorJob
