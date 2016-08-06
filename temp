@@ -1,5 +1,5 @@
 
-#SplunkAuditor
+####################### SplunkAuditor ##################
 
 | rest /servicesNS/-/-/search/jobs | eval diskUsageMB=diskUsage/1024/1024 | rename eai:acl.owner as user,eai:acl.app AS app_name |search user!="splunk-system-user" |eval search=if((isnull(label) OR label=""),sid,label)| stats sum(diskUsageMB) as totalDiskUsage by user app_name search |sort - totalDiskUsage
 
@@ -9,8 +9,16 @@ index=_audit source=audittrail info=completed search_id= user= NOT (user="splunk
 
 /opt/splunk/bin/splunk reload index
 
-Issues:
+#######################  Issues:
 
 http://docs.splunk.com/Documentation/Splunk/6.2.5/Indexer/Enableclustersindetail#Configure_the_secret_key
 http://docs.splunk.com/Documentation/Splunk/6.0/Indexer/Bucketreplicationissues
 CMStreamingErrorJob
+
+################### Team
+
+- Splunk index lod data which is stored in Time Series Index (TSIDX) files.
+
+- To configure multiple ingestion pipeline sets. To do that modify Server.conf located at $SPLUNK_HOME\etc\system\local as 
+follows for a number of ingestion pipeline sets:[general]parallelIngestionPipelines = 2 # For 2 Ingestion Pipeline sets
+
