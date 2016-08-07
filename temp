@@ -15,6 +15,9 @@ http://docs.splunk.com/Documentation/Splunk/6.2.5/Indexer/Enableclustersindetail
 http://docs.splunk.com/Documentation/Splunk/6.0/Indexer/Bucketreplicationissues
 CMStreamingErrorJob
 
+check the no of searches.
+dmesg | less
+
 ################### Team
 
 - Splunk index lod data which is stored in Time Series Index (TSIDX) files.
