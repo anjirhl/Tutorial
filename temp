@@ -25,3 +25,17 @@ dmesg | less
 - To configure multiple ingestion pipeline sets. To do that modify Server.conf located at $SPLUNK_HOME\etc\system\local as 
 follows for a number of ingestion pipeline sets:[general]parallelIngestionPipelines = 2 # For 2 Ingestion Pipeline sets
 
+Charts background colors
+
+To change the foreground color, use the following line of code:
+
+<option name="charting.foregroundColor">#9A5E2C</option>
+
+To change the font color (axis labels, legends), use the following line of code:
+
+<option name="charting.fontColor">#9A2C2C</option>
+
+To change the color to be used in the chart, the following syntax can be used to specify the series of colors:
+
+<option name="charting.seriesColors"> [0xF1F815,0xC2D1E0,0xF4F797,0xFEE000,0xFECF00,0xC69D2D,0xED8107,0xED6A07,0xF25805,0xFF9360]
+</option>
