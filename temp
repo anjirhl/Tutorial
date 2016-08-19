@@ -36,9 +36,7 @@ To change the color to be used in the chart, the following syntax can be used to
 <option name="charting.seriesColors"> [0xF1F815,0xC2D1E0,0xF4F797,0xFEE000,0xFECF00,0xC69D2D,0xED8107,0xED6A07,0xF25805,0xFF9360]
 </option>
 
-Events per second 
+firewall-cmd --zone=public --add-port=8000/tcp --permanent
+firewall-cmd --zone=public --add-port=8089/tcp --permanent
+firewall-cmd --reload
 
- eval _time = _indextime
- | bin _time span=30m
- | stats count by _time
- | timechart span=30m per_second(count) AS EPS
