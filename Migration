@@ -1,0 +1,59 @@
+
+Upgrade the existing environment to 6.4:
+
+1 Upgrade of the master node.
+2. Upgrade of the site1 peers and search heads.
+3. Upgrade of the site2 peers and search heads.
+Step by Step:
+
+1. Stop the master.
+2. Upgrade the master node.
+	rpm -U splunk_package_name.rpm
+3. Start the master, accepting all prompts, if it is not already running.
+4. Run splunk enable maintenance-mode on the master. To confirm that the
+master has entered maintenance mode, run splunk show maintenance-mode.
+
+This step prevents unnecessary bucket fix-ups. See "Use maintenance mode".
+
+5. Stop all the peers and search heads on site1 with the splunk stop command.
+
+6. Upgrade the site1 peer nodes and search heads.
+	rpm -U splunk_package_name.rpm
+
+7. Start the site1 peer nodes and search heads, if they are not already running.
+
+8. Run splunk disable maintenance-mode on the master. To confirm that the
+master has left maintenance mode, run splunk show maintenance-mode.
+
+9. Wait until the master dashboard shows that both the search factor and
+replication factor is met.
+
+10. Run splunk enable maintenance-mode on the master. To confirm that the
+master has entered maintenance mode, run splunk show maintenance-mode.
+
+11. Stop all the peers and search heads on site2 with the splunk stop command.
+
+12. Upgrade the site2 peer nodes and search heads.
+
+13. Start the site2 peer nodes and search heads, if they are not already running.
+
+14. Run splunk disable maintenance-mode on the master. To confirm that the
+master has left maintenance mode, run splunk show maintenance-mode.
+
+-Install 6.4 in new physical servers.
+Install rpms on all servers. Enable the the default ports required for splunk roles.
+-Add the new indexers to existing cluster.
+a.	->Deploy the apps from master -> new clients//re-deploy the bundle.
+b.	->Apply and verify the license slave settings.
+
+
+Add the search heads to the cluster.
+Migrate Search heads # 
+User, roles, authentication:
+- Copy $SPLUNK_HOME/etc/passwd (your user-password-roles pair)
+- Copy authorize.conf from $SPLUNK_HOME/etc/system/local/ (your roles definition)
+App/searches/Views. Locate your apps on $SPLUNK_HOME/etc/apps/
+If you do everything in "search" app, don't copy the search app folder completely as it might give you headache later on when you upgrade. I'll do the following inside of the search app:
+- copy your "local" folder (it has your searches, views, macros, lookups)
+- copy metadata/local.meta if you want to preserve who owns what searches (it's not important)
+-Copy /etc/users – for users private KO’s.
