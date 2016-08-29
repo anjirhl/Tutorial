@@ -1,0 +1,51 @@
+sudo su - root
+
+Create Cluster:
+
+MasterNode
+
+--> yum -y install wget // To get wget command
+--> yum -y install net-tools //To get ifconfig(ip details)
+--> wget -O splunk-6.2.8-275559-linux-2.6-x86_64.rpm 'https://www.splunk.com/page/download_track?file=6.2.8/linux/splunk-6.2.8-275559-linux-2.6-x86_64.rpm&ac=&wget=true&name=wget&platform=Linux&architecture=x86_64&version=6.2.8&product=splunk&typed=release'
+--> rpm -ivh --prefix=/opt/logs splunk-6.2.8-275559-linux-2.6-x86_64.rpm // For 124/Search heads
+--> rpm -ivh splunk-6.2.8-275559-linux-2.6-x86_64.rpm // For 124/Search heads
+
+Configure the master
+
+(Web)
+
+1. Click Settings on the upper right side of Splunk Web.
+2. In the Distributed Environment group, click Indexer clustering.
+
+Enable Master With Below details
+
+ Node Type(master)
+ Replication Factor(3)
+ Search Factor(2)
+ 
+(CLI)
+
+[clustering]
+mode = master
+replication_factor = 3
+search_factor = 2
+
+Configure the Peers
+
+(Web)
+
+1. Click Settings on the upper right side of Splunk Web.
+2. In the Distributed Environment group, click Indexer clustering.
+
+Enable Peers With Below details
+
+ Node Type(clave)
+ Master URI
+ 
+(CLI)
+
+[clustering]
+mode = master
+replication_factor = 3
+search_factor = 2
+
