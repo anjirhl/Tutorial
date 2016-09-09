@@ -40,3 +40,7 @@ firewall-cmd --zone=public --add-port=8000/tcp --permanent
 firewall-cmd --zone=public --add-port=8089/tcp --permanent
 firewall-cmd --reload
 
+(?<Service>\w+)(?=\])
+
+2016-09-09 13:58:00,000 INFO  [org.webapp.service.shop] (http--0.0.0.0-8080-47) Response: threadId="67521473409673", result="success"
+2016-09-09 13:57:59,000 INFO  [org.webapp.service.perf] (http--0.0.0.0-8080-47) Execute: threadId="67521473409673", perfType="DB", con_total=10, con_used=4
