@@ -42,3 +42,6 @@ firewall-cmd --reload
 
 (?<Service>\w+)(?=\])
 splunk rebalance cluster-data -action start
+
+find . -name props.conf | xargs ls -ltr
+
