@@ -45,5 +45,5 @@ splunk rebalance cluster-data -action start
 
 find . -name props.conf | xargs ls -ltr
 
-./splunk apply shcluster-bundle -target https://<any member ip>:8089 admin:changeme
+./splunk apply shcluster-bundle -target https://<any member ip>:8089 -auth admin:changeme
 
