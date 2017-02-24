@@ -47,3 +47,7 @@ find . -name props.conf | xargs ls -ltr
 
 ./splunk apply shcluster-bundle -target https://<any member ip>:8089 -auth admin:changeme
 
+/opt/jdk1.8.0_121/
+-XX:+UseConcMarkSweepGC
+9998
+
