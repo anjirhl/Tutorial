@@ -51,3 +51,6 @@ find . -name props.conf | xargs ls -ltr
 -XX:+UseConcMarkSweepGC
 9998
 
+splunk clean eventdata -index _fishbucket
+
+
