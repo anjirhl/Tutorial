@@ -53,4 +53,8 @@ find . -name props.conf | xargs ls -ltr
 
 splunk clean eventdata -index _fishbucket
 
+Match last character 
+.*/
+.*=
+
 
