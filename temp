@@ -57,4 +57,7 @@ Match last character
 .*/
 .*=
 
+grep -rnw '/opt/splunk' -e "search name"
+_index_earliest="11/01/2016:00:00:00" _index_latest="11/01/2016:23:59:59"
 
+earliest=”11/01/2016:00:00:00″ latest=”11/01/2016:23:59:59″
