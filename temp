@@ -40,6 +40,10 @@ firewall-cmd --zone=public --add-port=8000/tcp --permanent
 firewall-cmd --zone=public --add-port=8089/tcp --permanent
 firewall-cmd --reload
 
+iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 8000 -j ACCEPT
+iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 8089 -j ACCEPT
+iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 9997 -j ACCEPT
+
 (?<Service>\w+)(?=\])
 splunk rebalance cluster-data -action start
 
@@ -61,3 +65,8 @@ grep -rnw '/opt/splunk' -e "search name"
 _index_earliest="11/01/2016:00:00:00" _index_latest="11/01/2016:23:59:59"
 
 earliest=”11/01/2016:00:00:00″ latest=”11/01/2016:23:59:59″
+
+Marketing #
+
+http://www.desipearl.com
+
