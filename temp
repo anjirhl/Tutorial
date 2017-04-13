@@ -3,11 +3,16 @@
 
 | rest /servicesNS/-/-/search/jobs | eval diskUsageMB=diskUsage/1024/1024 | rename eai:acl.owner as user,eai:acl.app AS app_name |search user!="splunk-system-user" |eval search=if((isnull(label) OR label=""),sid,label)| stats sum(diskUsageMB) as totalDiskUsage by user app_name search |sort - totalDiskUsage
 
-index=_audit source=audittrail info=completed search_id= user= NOT (user="splunk-system-user" OR user="n/a" OR search_id=rt OR savedsearch_name="") |rex field=_raw "^.__{1}(?P.*)__" |stats count AS No_Runs,avg(total_run_time) AS avg_run_time by savedsearch_name splunk_server user app_name|eval avg_run_time=round(avg_run_time/60,2)|sort - No_Runs avg_run_time
+index=_audit source=audittrail info=completed search_id= user= NOT (user="n/a" OR search_id=rt OR savedsearch_name="") |rex field=_raw "^.__{1}(?P.*)__" |stats count AS No_Runs,avg(total_run_time) AS avg_run_time by savedsearch_name splunk_server user app_name|eval avg_run_time=round(avg_run_time/60,2)|sort - No_Runs avg_run_time
 
 # Reload the indexer 
 
 /opt/splunk/bin/splunk reload index
+
+# Users Running Searches with out index / sourcetype :
+
+index=_audit action=search search=* sourcetype=audittrail  search=* search_id=* NOT (user=splunk-system-user ) | rex field=search "sourcetype\s*=\s*\"*(?<SourcetypeUsed>[^\s\"]+)"  | rex field=search "index\s*=\s*\"*(?<IndexUsed>[^\s\"]+)" | where isnull(IndexUsed) OR isnull(SourcetypeUsed) | table _time user search search_id
+  
 
 #######################  Issues:
 
@@ -62,6 +67,7 @@ Match last character
 .*=
 
 grep -rnw '/opt/splunk' -e "search name"
+
 _index_earliest="11/01/2016:00:00:00" _index_latest="11/01/2016:23:59:59"
 
 earliest=”11/01/2016:00:00:00″ latest=”11/01/2016:23:59:59″
@@ -69,4 +75,25 @@ earliest=”11/01/2016:00:00:00″ latest=”11/01/2016:23:59:59″
 Marketing #
 
 http://www.desipearl.com
+
+Links To Check # 
+
+https://answers.splunk.com/answers/455256/how-can-i-end-a-long-running-search-job-using-the.html
+
+# search parallelization (Indexer Side)
+[search]
+allow_batch_mode = true
+batch_search_max_pipeline = 2
+
+# Indexers parallelization(Indexer / Forwarders)
+server.conf 
+[general]
+parallelIngestionPipelines = 1
+
+
+# Find realtime seaarches 
+
+| rest /services/search/jobs/  | search isRealTimeSearch="1"
+
+
 
