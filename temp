@@ -96,4 +96,5 @@ parallelIngestionPipelines = 1
 | rest /services/search/jobs/  | search isRealTimeSearch="1"
 
 
-
+<option name="charting.chart.showMarkers">1</option>
+<option name="charting.lineDashStyle">shortDash</option>
