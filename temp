@@ -98,3 +98,4 @@ parallelIngestionPipelines = 1
 
 <option name="charting.chart.showMarkers">1</option>
 <option name="charting.lineDashStyle">shortDash</option>
+where ((now()-_time)/60/60/24) <=180
