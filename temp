@@ -101,3 +101,7 @@ parallelIngestionPipelines = 1
 where ((now()-_time)/60/60/24) <=180
 
 ./splunk cmd btool server list --debug | grep '\['
+
+/sbin/sysctl -p #Reload ulimits with out reboot.
+
+
