@@ -105,3 +105,5 @@ where ((now()-_time)/60/60/24) <=180
 /sbin/sysctl -p #Reload ulimits with out reboot.
 
 
+|rest /services/server/info|table  cluster_label cpu_arch host_fqdn numberOfCores numberOfVirtualCores  os_name  os_version physicalMemoryMB product_type serverName server_roles shcluster_label splunk_server startup_time title version 
+
