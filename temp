@@ -111,3 +111,6 @@ https://wiki.splunk.com/Community:Splunk_Visio_Stencil
 
 splunk btool --debug props list
 
+./splunk show kvstore-status
+backup /var/lib/splunk/kvstore
+./splunk clean kvstore --local
