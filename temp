@@ -124,3 +124,5 @@ backup /var/lib/splunk/kvstore
  | join type=left max=1500 srchIndexesDefault [rest /services/data/indexes | table title | eval srchIndexesDefault = if(match(title, "^_"), "_*", "*") | rename title as IndexesDefault]
  | stats values(*) as * by user
  | foreach srch* [eval <<FIELD>> = mvappend(<<FIELD>>, <<MATCHSTR>>) | eval <<FIELD>> = mvfilter(match(<<FIELD>>, "^[^*]+$"))]
+
+http://www.cic.gc.ca/english/immigrate/skilled/crs-tool.asp
